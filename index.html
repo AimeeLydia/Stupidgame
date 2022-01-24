@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stupid Game</title>
+    <script src="pixi/pixi.js"></script>
+    <script>
+        let app;
+        let avatar;
+        let keys = {}; 
+        
+
+        window.onload = function () {
+            app = new PIXI.Application(
+                {
+                    width: 800,
+                    height: 600,
+                    backgroundColor: 0x34ebd2
+                }
+            );
+            app.renderer.resize(window.innerWidth, window.innerHeight);
+
+            app.renderer.view.style.position = 'absolute';
+            document.body.appendChild(app.view);
+        
+
+
+            avatar = new PIXI.Sprite.from("images/cursed_cat(1).png");
+            avatar.anchor.set(0.5);
+            avatar.x = window.innerWidth / 2;
+            avatar.y = window.innerHeight / 2;
+
+
+
+            app.stage.addChild(avatar);
+
+            window.addEventListener("keydown", keysDown); 
+            window.addEventListener("keyup", keysUp); 
+
+            app.ticker.add(gameLoop);
+
+            
+        }
+
+        function keysDown(e) {
+            keys[e.keyCode] = true;
+        }
+        
+        function keysUp(e) {
+             keys[e.keyCode] = false;
+        }
+
+        function gameLoop() {
+           
+
+            if (keys["65"]) {
+                avatar.x -= 100; // left
+            }
+            if (keys["68"]){
+                avatar.x += 100; //right
+            }
+            if (keys["87"]) {
+                avatar.y -= 100; //up
+            }
+            if (keys["83"]) {
+                avatar.y += 100; //down
+            }
+            
+        }
+
+
+
+        
+        
+
+    </script>
+</head>
+
+<body>
+</body>
+</html>
